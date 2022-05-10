@@ -104,3 +104,139 @@ const viewDepartments = async () => {
     };
 }
 
+const addEmployee = async () => {
+    try {
+        console.log('Employee Add');
+
+        let roles = await connection.query("SELECT * FROM role");
+
+        let managers = await connection.query("SELECT * FROM  employee");
+
+        let answer = await inquirer.prompt([
+            {
+            name: 'firstName',
+            type: 'input',
+            message: 'What is the first name of this Employee?'
+            },
+            {
+            name: 'lastName',
+            type: 'input',
+            message: 'What is the last name of this Employee?'
+            },
+            {
+            name: 'employeeRoleId',
+            type: 'list',
+            choices: roles.map((role) => {
+                return {
+                    name: role.title,
+                    value: role.id
+                }
+            }),
+            message: "What is this Employee's role ID?"
+            },
+            {
+            name: 'employeeManagerId',
+            type: 'list',
+            choices: managers.map((manager) => {
+                return {
+                    name: manager.first_name + " " + manager.last_name,
+                    value: manager.id
+                }
+            }),
+            message: "What is this Employee Manager's ID?"
+            },
+        ])
+
+        let result = await connection.query("INSERT INTO employee SET ?", {
+            first_name: answer.firstname,
+            last_name: answer.lastname,
+            role_id: (answer.employeeRoleId),
+            manager_id: (answer.employeeManagerId)
+        });
+
+        console.log(`${answer.firstName} ${answer.lastname} added successfully.\n`);
+        initialAction();
+    } catch (err) {
+        console.log(err);
+        initialAction();
+    };
+}
+
+const addDepartments = async () => {
+    try {
+        console.log('Department Add');
+
+        let answer = await inquirer.prompt([
+            {
+                name: 'deptName',
+                type: 'input',
+                message: 'What is the name of your new department?'
+            }
+        ]);
+
+        let result = await connection.query("INSERT INTO department SET ?", {
+            department_dept_name: answer.deptName
+        });
+
+        console.log(`${answer.deptName} added successfully to departments.\n`)
+    } catch (err) {
+        console.log(err);
+        initialAction();
+    };
+}
+
+const addRole = async () => {
+    try {
+        console.log('Role Add');
+
+        let department = await connection.query("SELECT * FROM department")
+
+        let answer = await inquirer.prompt([
+            {
+                name: 'title',
+                type: 'input',
+                message: 'What is the name of your new role?'
+            },
+            {
+                name: 'salary',
+                type: 'input',
+                message: 'What salary will this role provide?'
+            },
+            {
+                name: 'departmentId',
+                type: 'list',
+                choices: department.map((departmentId) => {
+                    return {
+                        name: departmentId.department_name,
+                        value: departmentId.id
+                    }
+                }),
+                message: 'What department ID is this role associated with?',
+            },
+        ]);
+
+        let result = await connection.query("INSERT INTO role SET ?", {
+            title: answer.title,
+            salary: answer.salary,
+            department_id: answer.departmentId
+        })
+
+        console.log(`${answer.title} role added successfully.\n`)
+        initialAction();
+    } catch (err) {
+        console.log(err);
+        initialAction();
+    };
+}
+
+const employeeUpdate = async () => {
+    try {
+        console.log('Employee Update');
+
+        let employees = await connection.query("SELECT * FROM employee");
+
+        let employeeSelection = await inquirer.prompt{[
+            
+        ]}
+    }
+}
