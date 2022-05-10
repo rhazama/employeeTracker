@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const consoletable = require('console.table');
 const util = require('util');
 const { connection } = require('.config/connection');
+const { connect } = require('http2');
 
 connection.query = util.promisify(conenction.query);
 
@@ -78,6 +79,23 @@ const viewEmployees = async () => {
             let employeeArray = [];
             res.forEach(employee => employeeArray.push(employee));
             console.table(employeeArray);
+            initialAction();
+        });
+    } catch (err) {
+        console.log(err);
+        initialAction();
+    };
+}
+
+const viewDepartments = async () => {
+    console.log('Department View');
+    try {
+        let query = 'SELECT * FROM department';
+        connect.query(query, function (err, res) {
+            if (err) throw err;
+            let departmentArray = [];
+            res.forEach(department => departmentArray.push(department));
+            console.table(departmentArray);
             initialAction();
         });
     } catch (err) {
