@@ -23,19 +23,23 @@ VALUES
 (19, "HR Manager", 100.50, 006),
 (20, "Sales Associate", 100.50, 001),
 (21, "HR Manager", 100.50, 006),
-(19, "Accountant", 100.50, 004),
+(22, "Accountant", 100.50, 004),
 (23, "HR Rep", 100.50, 006),
 (26, "Junior Developer", 100.50, 005);
 
 
 INSERT INTO employee (id, first_name, role_id, manage_id)
 VALUES 
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null),
-(1000, "", "A", 3000, null);
+(1000, "Boss", "A", 01, null),
+(1001, "Ted", "H", 02, null),
+(1002, "Austin", "K", 03, null),
+(1003, "Gloria", "T", 04, null),
+(1004, "Fredrick", "P", 05, null),
+(1005, "Tod", "T", 11, null),
+(1006, "Bethany", "A", 15, null),
+(1007, "Brittney", "N", 19, null),
+(1008, "Rachel", "J", 20, 1006),
+(1009, "Tommy", "W", 21, null),
+(1010, "Ryan", "L", 22, null),
+(1011, "Alex", "H", 23, 1009),
+(1011, "Andy", "W", 26, 1005);
