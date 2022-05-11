@@ -239,7 +239,7 @@ const employeeUpdate = async () => {
             {
                 name: 'employee',
                 type: 'list',
-                choices: employee.map((employeeName) => {
+                choices: employees.map((employeeName) => {
                     return {
                         name: employeeName.first_name + " " + employeeName.last_name,
                         value: employeeName.id
@@ -269,6 +269,7 @@ const employeeUpdate = async () => {
 
         console.log(`The role was successfully updated.\n`)
         initialAction();
+        
     } catch (err) {
         console.log(err);
         initialAction();
