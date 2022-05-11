@@ -1,11 +1,11 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const consoletable = require('console.table');
+const consoleTable = require('console.table');
 const util = require('util');
 const { connection } = require('.config/connection');
 const { connect } = require('http2');
 
-connection.query = util.promisify(conenction.query);
+connection.query = util.promisify(connection.query);
 
 connection.connect(function (err) {
     if(err) throw err;
@@ -269,7 +269,7 @@ const employeeUpdate = async () => {
 
         console.log(`The role was successfully updated.\n`)
         initialAction();
-        
+
     } catch (err) {
         console.log(err);
         initialAction();
